@@ -1,7 +1,9 @@
 <template>
-    <div>
-
-    </div>
+     <AuthenticationCard>
+        <template #logo>
+            <AuthenticationCardLogo/>
+        </template>
+    </AuthenticationCard>
 </template>
 
 <script setup lang="ts">
