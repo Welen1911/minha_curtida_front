@@ -1,8 +1,21 @@
 <script setup lang="ts">
-    const state = reactive({
+import services from '~/services';
+import type Login from '~/utils/interfaces/login';
+
+    const state = reactive<Login>({
         email: '',
         password: ''
     });
+
+    const handleSubmit = async () => {
+        try {
+            const { data } = await services.auth.login(state);
+
+            console.log(data);
+        } catch (e) {
+            console.error(e);
+        }
+    }
 </script>
 
 <template>
@@ -10,7 +23,7 @@
         <template #logo>
             <AuthenticationCardLogo />
         </template>
-        <form>
+        <form @submit.prevent="handleSubmit">
             <div>
                 <InputLabel for="email" value="Email" />
                 <TextInput id="email" v-model="state.email" type="email" class="mt-1 block w-full" required autofocus
